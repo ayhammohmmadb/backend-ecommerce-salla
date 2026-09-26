@@ -3,7 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { createObserveModule } from '@nestjs/observe';
 import { UserModule } from './user/user.module.js';
-
+import { JwtModule } from '@nestjs/jwt';
+import { SellerRequestModule } from './seller_request/seller_request.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -16,24 +17,32 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     //   appSecret: 'YOUR_APP_SECRET',
     //   serviceId: 'salla',
     // }),
+
     ConfigModule.forRoot({
-      isGlobal:true,
-      envFilePath:".env"
+      isGlobal: true,
+      envFilePath: '.env',
     }),
-  MongooseModule.forRootAsync({
-    inject:[ConfigService],
-    useFactory:(configService:ConfigService)=>{
-      const uri=configService.get<string>("MONGODB_URI");
-      if(!uri)
-      {
-        throw new Error("MONGODB_URI is not defiend in .env");
-      }
-      return {
-        uri
-      }
-    }
-  }),
-  UserModule
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const uri = configService.get<string>('MONGODB_URI');
+        if (!uri) {
+          throw new Error('MONGODB_URI is not defiend in .env');
+        }
+        return {
+          uri,
+        };
+      },
+    }),
+    UserModule,
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        expiresIn: '1d',
+      },
+    }),
+    SellerRequestModule,
   ],
   controllers: [],
   providers: [],
