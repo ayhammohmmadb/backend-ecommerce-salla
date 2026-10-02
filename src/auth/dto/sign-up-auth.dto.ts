@@ -14,9 +14,10 @@ import {
   MinLength,
 } from 'class-validator';
 import { Role } from '../../guard/role.enum.js';
-import { Gender } from '../user.schema.js';
+import { Gender } from '../../user/user.schema.js';
 
-export class CreateUserDto {
+
+export class SignUpAuthDto {
   @IsString()
   @MinLength(3)
   @MaxLength(30)

@@ -1,13 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Role } from '../guard/role.enum.js';
 
 export type UserDocument = HydratedDocument<User>;
-export enum Role {
-  USER = 'user',
-  Admin = 'admin',
-  MANAGER = 'manager',
-  SELLER = 'seller',
-}
+
 export enum Gender {
   MALE = 'male',
   FEMAL = 'female',
@@ -75,5 +71,10 @@ export class User {
     enum: Gender,
   })
   gender?: Gender;
+@Prop({type:String})
+token:string;
+@Prop({type:String})
+refreshToken:string;
+
 }
 export const UserSchema = SchemaFactory.createForClass(User);

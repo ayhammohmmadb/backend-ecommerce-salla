@@ -9,12 +9,13 @@ import {
   SellerRequestDocument,
 } from './seller_request.schema.js';
 import { Model, Types } from 'mongoose';
-import { Role, User, UserDocument } from '../user/user.schema.js';
+import { User, UserDocument } from '../user/user.schema.js';
 import { CreateSellerRequestDto } from './dto/create-seller_request.dto.js';
 
 import { SellerRequestStatus } from './selller.enum.js';
 
 import { RejectSellerRequestDto } from './dto/reject-seller-request.dto.js';
+import { Role } from '../guard/role.enum.js';
 
 @Injectable()
 export class SellerRequestService {

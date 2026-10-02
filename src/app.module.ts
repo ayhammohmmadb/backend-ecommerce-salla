@@ -5,6 +5,7 @@ import { createObserveModule } from '@nestjs/observe';
 import { UserModule } from './user/user.module.js';
 import { JwtModule } from '@nestjs/jwt';
 import { SellerRequestModule } from './seller_request/seller_request.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -43,6 +44,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       },
     }),
     SellerRequestModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

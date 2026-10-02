@@ -7,12 +7,13 @@ import {
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
 import { InjectModel } from '@nestjs/mongoose';
-import { Role, User, UserDocument } from './user.schema.js';
+import { User, UserDocument } from './user.schema.js';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { BasicGroupByOptions } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { UserQueryDto } from './dto/user-query.dto.js';
+import { Role } from '../guard/role.enum.js';
 @Injectable()
 export class UserService {
   constructor(
